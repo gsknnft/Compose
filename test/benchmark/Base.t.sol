@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.30;
 
-import {Utils} from "./Utils.sol";
+import {Utils} from "../utils/Utils.sol";
 
 import {MinimalDiamond} from "./MinimalDiamond.sol";
 import {LibDiamond} from "../../src/diamond/LibDiamond.sol";
