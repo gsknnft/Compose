@@ -92,14 +92,13 @@ library TensorPayload {
         uint256 byteIndex = flatIndex & 31;
 
         uint256[] storage words = l.packedU8[tensorId];
-        if (wordIndex >= words.length) {
-            return 0;
+        if (wordIndex < words.length) {
+            uint256 word = words[wordIndex];
+            uint256 shift = (31 - byteIndex) << 3;
+            uint256 byteVal = (word >> shift) & 0xff;
+            return int256(byteVal);
         }
-
-        uint256 word = words[wordIndex];
-        uint256 shift = (31 - byteIndex) << 3;
-        uint256 byteVal = (word >> shift) & 0xff;
-        value = int256(byteVal);
+        return 0;
     }
 
     function readPayload(

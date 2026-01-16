@@ -19,11 +19,15 @@ contract TensorBatchFacet {
     ) external {
         uint256 len = keys.length;
         require(len == values.length, "length mismatch");
+        if (len == 0) {
+            return;
+        }
 
         TensorStorage.Layout storage l = TensorStorage.layout();
 
         bytes32[] memory checkedIds = new bytes32[](len);
         uint256 checkedCount;
+        bytes32 singleId;
 
         for (uint256 i; i < len; ) {
             bytes32 id = keys[i].id;
@@ -46,6 +50,11 @@ contract TensorBatchFacet {
                 require(!TensorPayload.hasPackedU8(l, id), "packed immutable");
 
                 checkedIds[checkedCount] = id;
+                if (checkedCount == 0) {
+                    singleId = id;
+                } else if (singleId != id) {
+                    singleId = bytes32(0);
+                }
                 unchecked {
                     checkedCount++;
                 }
@@ -56,12 +65,22 @@ contract TensorBatchFacet {
             }
         }
 
-        for (uint256 i; i < len; ) {
-            TensorStorage.TensorKey calldata k = keys[i];
-            l.data[k.id][k.flatIndex] = values[i];
+        if (singleId != bytes32(0)) {
+            mapping(uint256 => int256) storage slots = l.data[singleId];
+            for (uint256 i; i < len; ) {
+                slots[keys[i].flatIndex] = values[i];
+                unchecked {
+                    i++;
+                }
+            }
+        } else {
+            for (uint256 i; i < len; ) {
+                TensorStorage.TensorKey calldata k = keys[i];
+                l.data[k.id][k.flatIndex] = values[i];
 
-            unchecked {
-                i++;
+                unchecked {
+                    i++;
+                }
             }
         }
 
