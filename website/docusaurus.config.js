@@ -212,12 +212,6 @@ const config = {
                 label: 'Installation',
                 to: '/docs/getting-started/installation',
               },
-              /*
-              {
-                label: 'Quick Start',
-                to: '/docs/getting-started/quick-start',
-              },
-              */
             ],
           },
           {
@@ -264,11 +258,40 @@ const config = {
         algolia: {
           appId: process.env.ALGOLIA_APP_ID,
           apiKey: process.env.ALGOLIA_API_KEY,
-          indexName: process.env.ALGOLIA_INDEX_NAME || 'compose',
+          indexName: process.env.ALGOLIA_INDEX_NAME || 'Compose',
           contextualSearch: true,
         },
       }),
+      // Giscus commenting system configuration
+      // See here for more information: https://github.com/giscus/giscus
+      ...(process.env.GISCUS_REPO && process.env.GISCUS_REPO_ID && process.env.GISCUS_CATEGORY_ID && {
+        giscus: {
+          repo: process.env.GISCUS_REPO,
+          repoId: process.env.GISCUS_REPO_ID,
+          category: process.env.GISCUS_CATEGORY || 'Blog',
+          categoryId: process.env.GISCUS_CATEGORY_ID,
+          mapping: process.env.GISCUS_MAPPING || 'pathname',
+          strict: process.env.GISCUS_STRICT || '0',
+          reactionsEnabled: process.env.GISCUS_REACTIONS_ENABLED || '1',
+          emitMetadata: process.env.GISCUS_EMIT_METADATA || '0',
+          inputPosition: process.env.GISCUS_INPUT_POSITION || 'top',
+          lang: process.env.GISCUS_LANG || 'en',
+          loading: process.env.GISCUS_LOADING || 'lazy'
+        },
+      }),
     }),
+  plugins: [
+    process.env.POSTHOG_API_KEY && [
+      "posthog-docusaurus",
+      {
+        apiKey: process.env.POSTHOG_API_KEY,
+        appUrl: 'https://compose.diamonds/54Q17895d65',
+        uiHost: 'https://us.posthog.com',
+        enableInDevelopment: false, 
+        capturePageLeave: true,
+      },
+    ],
+  ].filter(Boolean),
 };
 
 export default config;

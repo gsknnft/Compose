@@ -83,8 +83,6 @@
 
 /* Import responsive breakpoints */
 @import url('./responsive.css');
-<<<<<<< HEAD
-=======
 
 
 
@@ -112,4 +110,26 @@
 .token.important {
   font-style: normal !important;
 }
->>>>>>> mudge/main
+
+/* ============================================
+   GISCUS COMMENTS STYLING
+   ============================================ */
+
+/* Ensure Giscus iframe container matches our design */
+.giscus,
+.giscus-frame {
+  width: 100%;
+  border: none;
+  margin-top: 1.5rem;
+}
+
+/* Style the Giscus container wrapper */
+[class*="giscus"] {
+  font-family: var(--ifm-font-family-base);
+}
+
+/* Ensure proper spacing for comments section in blog posts */
+article .giscus {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}

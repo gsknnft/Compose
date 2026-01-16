@@ -5,13 +5,13 @@ description: Compose is written to be read by other developers.
 ---
 
 
-The primary design principle of Compose is **clarity**. Code should be easy to read and understand. 
+The primary design principle of Compose is **the code should be easy to read and understand**. 
 
 This is the top design and guiding principle of this project. We help our users *understand* the things they want to know so they can *confidently* achieve what they are trying to do. This is why we must have very good documentation, and why we write easy to read and understand code. Understanding leads to solutions, creates confidence, kills bugs and gets things done. Understanding is everything. So we nurture it and create it.
 
 The design of Compose includes guidelines and rules that promote readability and consistency throughout the codebase.
 
-Though many people may contribute to the Compose standard library of facets and libraries, it should look like it was written by one person.
+Though many people may contribute to the Compose standard library of facets and modules, it should look like it was written by one person.
 
 ***
 
@@ -19,13 +19,13 @@ Though many people may contribute to the Compose standard library of facets and 
 
 Each facet is a complete, standalone unit. Its source file contains all the code it needs, with no imports or dependencies on other files.
 
-Likewise, each Solidity library is also self-contained, with no external imports or dependencies.
+Likewise, each Solidity module is also self-contained, with no external imports or dependencies.
 
 ***
 
 ### Facets Are Read from Top to Bottom
 
-Compose facets and libraries are written to be read naturally from top to bottom. 
+Compose facets and modules are written to be read naturally from top to bottom. 
 
 Definitions appear before their use, so readers don't need to jump around the file to understand the code.
 
