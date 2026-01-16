@@ -2,7 +2,7 @@
 pragma solidity >=0.8.30;
 
 library LibDiamondQuery {
-    bytes32 constant DIAMOND_STORAGE_POSITION = keccak256("compose.diamond");
+    bytes32 constant DIAMOND_STORAGE_POSITION = keccak256("erc8109.diamond");
 
     function facetAddress(bytes4 selector) internal view returns (address facet) {
         bytes32 pos = DIAMOND_STORAGE_POSITION;

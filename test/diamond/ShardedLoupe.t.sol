@@ -44,13 +44,13 @@ contract MinimalDiamond {
         packedSelectors[0] = PackedLoupeExtension.facetAddressesPacked.selector;
         packedSelectors[1] = PackedLoupeExtension.selectorsPacked.selector;
         packedSelectors[2] = PackedLoupeExtension.facetsPacked.selector;
-        facets[2] = DiamondMod.FacetFunctions({facet: address(packedFacet), selectors: packedSelectors});
+        facets[2] = FacetFunctions({facet: address(packedFacet), selectors: packedSelectors});
 
-        DiamondMod.addFacets(facets);
+        addFacets(facets);
     }
 
     fallback() external payable {
-        DiamondMod.diamondFallback();
+        diamondFallback();
     }
 
     receive() external payable {}

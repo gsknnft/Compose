@@ -5,7 +5,7 @@ pragma solidity ^0.8.24;
 /// @notice Canonical Diamond storage for tensor capsule registry.
 /// @dev Append-only: NEVER reorder fields. Only append.
 /// WIP and on hold until capsule facet is stable. - using unified TensorStorage for now.
-
+library LibCapsuleStorage {
     bytes32 internal constant STORAGE_SLOT =
         keccak256("diamond.tensor.capsule.storage.v1");
 
@@ -29,3 +29,4 @@ pragma solidity ^0.8.24;
             l.slot := slot
         }
     }
+}

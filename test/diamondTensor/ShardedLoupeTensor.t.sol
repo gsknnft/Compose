@@ -8,7 +8,7 @@ import {ShardedDiamondLoupeFacet} from "src/diamond/ShardedDiamondLoupeFacet.sol
 import {PackedLoupeExtension} from "src/diamond/PackedLoupeExtension.sol";
 import {InitShardedLoupe} from "src/diamond/InitShardedLoupe.sol";
 import {LibDiamondShard} from "src/diamond/LibDiamondShard.sol";
-import {DiamondMod} from "src/diamond/DiamondMod.sol";
+import "src/diamond/DiamondMod.sol";
 
 import {TensorManagerFacet} from "src/diamondTensors/TensorManagerFacet.sol";
 import {TensorReadFacet} from "src/diamondTensors/TensorReadFacet.sol";
@@ -31,30 +31,30 @@ contract MinimalDiamondTensor {
     constructor(DiamondUpgradeFacet upgradeFacet, ShardedDiamondLoupeFacet loupeFacet, PackedLoupeExtension packedFacet, address owner) {
         _setOwner(owner);
 
-        DiamondMod.FacetFunctions[] memory facets = new DiamondMod.FacetFunctions[](3);
+        FacetFunctions[] memory facets = new FacetFunctions[](3);
 
         bytes4[] memory upgradeSelectors = new bytes4[](1);
         upgradeSelectors[0] = IDiamondUpgradeTensor.upgradeDiamond.selector;
-        facets[0] = DiamondMod.FacetFunctions({facet: address(upgradeFacet), selectors: upgradeSelectors});
+        facets[0] = FacetFunctions({facet: address(upgradeFacet), selectors: upgradeSelectors});
 
         bytes4[] memory loupeSelectors = new bytes4[](4);
         loupeSelectors[0] = ShardedDiamondLoupeFacet.facetAddress.selector;
         loupeSelectors[1] = ShardedDiamondLoupeFacet.facetFunctionSelectors.selector;
         loupeSelectors[2] = ShardedDiamondLoupeFacet.facetAddresses.selector;
         loupeSelectors[3] = ShardedDiamondLoupeFacet.facets.selector;
-        facets[1] = DiamondMod.FacetFunctions({facet: address(loupeFacet), selectors: loupeSelectors});
+        facets[1] = FacetFunctions({facet: address(loupeFacet), selectors: loupeSelectors});
 
         bytes4[] memory packedSelectors = new bytes4[](3);
         packedSelectors[0] = PackedLoupeExtension.facetAddressesPacked.selector;
         packedSelectors[1] = PackedLoupeExtension.selectorsPacked.selector;
         packedSelectors[2] = PackedLoupeExtension.facetsPacked.selector;
-        facets[2] = DiamondMod.FacetFunctions({facet: address(packedFacet), selectors: packedSelectors});
+        facets[2] = FacetFunctions({facet: address(packedFacet), selectors: packedSelectors});
 
-        DiamondMod.addFacets(facets);
+        addFacets(facets);
     }
 
     fallback() external payable {
-        DiamondMod.diamondFallback();
+        diamondFallback();
     }
 
     receive() external payable {}

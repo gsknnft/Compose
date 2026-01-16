@@ -120,8 +120,9 @@ To complete validation:
 2. ⏳ Run benchmarks: `forge test --match-path test/benchmark/ShardedLoupe.t.sol -vv`
 3. ⏳ Compare gas results between baseline and sharded
 4. ⏳ Run full test suite to ensure no breaking changes
-5. ⏳ Review code in production environment
-6. ⏳ Deploy to testnet and validate
+5. ⏳ Generate coverage: `forge coverage --report lcov --ir-minimum` (required to avoid stack-too-deep on coverage builds)
+6. ⏳ Review code in production environment
+7. ⏳ Deploy to testnet and validate
 
 ## Status
 

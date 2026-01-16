@@ -22,13 +22,47 @@ contract TensorBatchFacet {
 
         TensorStorage.Layout storage l = TensorStorage.layout();
 
-        for (uint256 i = 0; i < len; i++) {
-            TensorStorage.TensorKey calldata k = keys[i];
-            require(l.meta[k.id].owner == msg.sender, "not owner");
-            require(!TensorPayload.hasPayload(l, k.id), "payload immutable");
-            require(!TensorPayload.hasPackedU8(l, k.id), "packed immutable");
+        bytes32[] memory checkedIds = new bytes32[](len);
+        uint256 checkedCount;
 
+        for (uint256 i; i < len; ) {
+            bytes32 id = keys[i].id;
+
+            bool seen;
+            for (uint256 j; j < checkedCount; ) {
+                if (checkedIds[j] == id) {
+                    seen = true;
+                    break;
+                }
+                unchecked {
+                    j++;
+                }
+            }
+
+            if (!seen) {
+                TensorStorage.TensorMeta storage meta = l.meta[id];
+                require(meta.owner == msg.sender, "not owner");
+                require(!TensorPayload.hasPayload(l, id), "payload immutable");
+                require(!TensorPayload.hasPackedU8(l, id), "packed immutable");
+
+                checkedIds[checkedCount] = id;
+                unchecked {
+                    checkedCount++;
+                }
+            }
+
+            unchecked {
+                i++;
+            }
+        }
+
+        for (uint256 i; i < len; ) {
+            TensorStorage.TensorKey calldata k = keys[i];
             l.data[k.id][k.flatIndex] = values[i];
+
+            unchecked {
+                i++;
+            }
         }
 
         // Optional: emit per-tensor aggregation later

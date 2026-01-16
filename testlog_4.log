@@ -1,0 +1,9 @@
+No files changed, compilation skipped
+
+Ran 3 tests for test/diamondTensor/TensorAlgebra.t.sol:TensorAlgebraTest
+[PASS] testAddCommutative(int256[4],int256[4]) (runs: 257, μ: 905078, ~: 934127)
+[PASS] testScaleDistributive(int256[4],int256[4],int256) (runs: 257, μ: 1867288, ~: 1912295)
+[PASS] testScaleIdentity(int256[4]) (runs: 256, μ: 475437, ~: 477159)
+Suite result: ok. 3 passed; 0 failed; 0 skipped; finished in 150.68ms (315.56ms CPU time)
+
+Ran 1 test suite in 153.26ms (150.68ms CPU time): 3 tests passed, 0 failed, 0 skipped (3 total tests)

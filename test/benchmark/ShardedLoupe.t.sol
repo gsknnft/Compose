@@ -2,8 +2,7 @@
 pragma solidity >=0.8.30;
 
 import {Test} from "forge-std/Test.sol";
-import {MinimalDiamond} from "./MinimalDiamond.sol";
-import {LibDiamond} from "../../src/diamond/LibDiamond.sol";
+import {MinimalDiamond, FacetCut, FacetCutAction, DiamondArgs} from "./MinimalDiamond.sol";
 import {DiamondLoupeFacet} from "../../src/diamond/DiamondLoupeFacet.sol";
 import {ShardedDiamondLoupeFacet} from "../../src/diamond/ShardedDiamondLoupeFacet.sol";
 import {LibDiamondShard} from "../../src/diamond/LibDiamondShard.sol";
@@ -12,7 +11,7 @@ import {InitShardedLoupe} from "../../src/diamond/InitShardedLoupe.sol";
 /// @title ShardedLoupeBenchmark
 /// @notice Comprehensive benchmarks comparing baseline vs sharded loupe across multiple configurations
 contract ShardedLoupeBenchmark is Test {
-    bytes32 constant DIAMOND_STORAGE_POSITION = keccak256("compose.diamond");
+    bytes32 constant DIAMOND_STORAGE_POSITION = keccak256("erc8109.diamond");
     bytes32 constant SHARDED_LOUPE_STORAGE_POSITION = keccak256("compose.sharded.loupe");
 
     bytes4 constant SELECTOR_FACETS = bytes4(keccak256("facets()"));
@@ -97,8 +96,8 @@ contract ShardedLoupeBenchmark is Test {
     function _enableShardedLoupe(address diamond) internal {
         // Deploy and call the init contract to enable sharded loupe
         InitShardedLoupe initContract = new InitShardedLoupe();
-        LibDiamond.FacetCut[] memory noCuts = new LibDiamond.FacetCut[](0);
-        MinimalDiamond.DiamondArgs memory args = MinimalDiamond.DiamondArgs({
+        FacetCut[] memory noCuts = new FacetCut[](0);
+        DiamondArgs memory args = DiamondArgs({
             init: address(initContract), initCalldata: abi.encodeCall(initContract.init, ())
         });
         MinimalDiamond(payable(diamond)).initialize(noCuts, args);
@@ -131,12 +130,12 @@ contract ShardedLoupeBenchmark is Test {
         loupeSelectors[2] = SELECTOR_FACET_ADDRESSES;
         loupeSelectors[3] = SELECTOR_FACET_ADDRESS;
 
-        LibDiamond.FacetCut[] memory dc = new LibDiamond.FacetCut[](1);
-        dc[0] = LibDiamond.FacetCut({
-            facetAddress: loupeAddr, action: LibDiamond.FacetCutAction.Add, functionSelectors: loupeSelectors
+        FacetCut[] memory dc = new FacetCut[](1);
+        dc[0] = FacetCut({
+            facetAddress: loupeAddr, action: FacetCutAction.Add, functionSelectors: loupeSelectors
         });
 
-        MinimalDiamond.DiamondArgs memory args = MinimalDiamond.DiamondArgs({init: address(0), initCalldata: ""});
+        DiamondArgs memory args = DiamondArgs({init: address(0), initCalldata: ""});
         diamond.initialize(dc, args);
 
         // Build diamond storage

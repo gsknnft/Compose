@@ -8,7 +8,7 @@ import {LibShardedLoupe} from "./LibShardedLoupe.sol";
 /// @notice Optimized Diamond Loupe implementation using sharded SSTORE2 snapshots
 /// @dev Falls back to traditional loupe when sharding is not enabled
 contract ShardedDiamondLoupeFacet {
-    bytes32 constant DIAMOND_STORAGE_POSITION = keccak256("compose.diamond");
+    bytes32 constant DIAMOND_STORAGE_POSITION = keccak256("erc8109.diamond");
 
     /// @notice Data stored for each function selector
     struct FacetAndPosition {

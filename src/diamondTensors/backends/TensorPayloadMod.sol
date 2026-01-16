@@ -3,6 +3,7 @@ pragma solidity ^0.8.24;
 
 import {TensorStorage} from "../TensorStorage.sol";
 
+library TensorPayloadMod {
 /// @notice Helpers for reading tensor payloads stored as SSTORE2-style chunks.
     uint256 internal constant ELEMENT_BYTES = 32;
     uint256 internal constant CHUNK_BYTES = 24_576; // EIP-170 code size limit
@@ -156,3 +157,4 @@ import {TensorStorage} from "../TensorStorage.sol";
             outOffset += toCopy;
         }
     }
+}

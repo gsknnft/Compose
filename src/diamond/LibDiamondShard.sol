@@ -7,7 +7,7 @@ import {LibDiamondQuery} from "./LibDiamondQuery.sol";
 /// @title LibDiamondShard
 /// @notice Helper library for managing sharded loupe updates during diamond cuts
 library LibDiamondShard {
-    bytes32 constant DIAMOND_STORAGE_POSITION = keccak256("compose.diamond");
+    bytes32 constant DIAMOND_STORAGE_POSITION = keccak256("erc8109.diamond");
     bytes32 constant DEFAULT_CATEGORY = keccak256("loupe:category:default");
 
     struct FacetAndPosition {

@@ -4,7 +4,7 @@ pragma solidity ^0.8.24;
 /// @title TensorStorage
 /// @notice Canonical storage layout for DiamondTensorCore (shared by all facets).
 /// @dev Append-only rule: NEVER reorder fields inside Layout. Only append new fields.
-
+library TensorStorage {
     /// @notice Storage slot for the entire tensor system (DiamondStorage-style).
     bytes32 internal constant STORAGE_SLOT =
         keccak256("diamond.tensor.core.storage.v1");
@@ -129,3 +129,4 @@ pragma solidity ^0.8.24;
             l.slot := slot
         }
     }
+}

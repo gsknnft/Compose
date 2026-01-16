@@ -5,15 +5,14 @@ pragma solidity >=0.8.30 <0.9.0;
  * https://compose.diamonds
  */
 
-import {StdCheats} from "forge-std/StdCheats.sol";
-import {StdAssertions} from "forge-std/StdAssertions.sol";
+import {Test} from "forge-std/Test.sol";
 
 import {Constants} from "./utils/Constants.sol";
 import {Defaults} from "./utils/Defaults.sol";
 import {Modifiers} from "./utils/Modifiers.sol";
 import {Users} from "./utils/Types.sol";
 
-abstract contract Base_Test is Constants, Modifiers, StdAssertions, StdCheats {
+abstract contract Base_Test is Test, Constants, Modifiers {
     /*//////////////////////////////////////////////////////////////
                                VARIABLES
     //////////////////////////////////////////////////////////////*/

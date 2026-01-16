@@ -34,8 +34,9 @@ contract TensorMathFacet {
         require(mb.owner == msg.sender, "not owner B");
         require(l.exists[a], "missing A");
         require(l.exists[b], "missing B");
+        uint256 size = ma.size;
         require(ma.rank == mb.rank, "rank mismatch");
-        require(ma.size == mb.size, "shape mismatch");
+        require(size == mb.size, "shape mismatch");
 
         uint64 nonce = ++l.nonces[msg.sender][seed];
         out = SeedUtils.tensorId(msg.sender, seed, nonce);
@@ -47,7 +48,7 @@ contract TensorMathFacet {
             owner: msg.sender,
             rank: ma.rank,
             shape: ma.shape,
-            size: ma.size,
+            size: size,
             createdAt: uint64(block.timestamp),
             flags: 0,
             reserved: 0
@@ -56,10 +57,11 @@ contract TensorMathFacet {
         l.owned[msg.sender].push(out);
 
         // compute
-        for (uint256 i = 0; i < ma.size; i++) {
-            l.data[out][i] =
-                TensorPayload.readValue(l, a, i) +
-                TensorPayload.readValue(l, b, i);
+        for (uint256 i; i < size; ) {
+            l.data[out][i] = TensorPayload.readValue(l, a, i) + TensorPayload.readValue(l, b, i);
+            unchecked {
+                i++;
+            }
         }
 
         emit TensorComputed(a, b, out, "add");
@@ -77,6 +79,7 @@ contract TensorMathFacet {
         TensorStorage.Layout storage l = TensorStorage.layout();
 
         TensorStorage.TensorMeta storage ma = l.meta[a];
+        uint256 size = ma.size;
         require(ma.owner == msg.sender, "not owner");
         require(l.exists[a], "missing");
 
@@ -89,7 +92,7 @@ contract TensorMathFacet {
             owner: msg.sender,
             rank: ma.rank,
             shape: ma.shape,
-            size: ma.size,
+            size: size,
             createdAt: uint64(block.timestamp),
             flags: 0,
             reserved: 0
@@ -97,8 +100,11 @@ contract TensorMathFacet {
 
         l.owned[msg.sender].push(out);
 
-        for (uint256 i = 0; i < ma.size; i++) {
+        for (uint256 i; i < size; ) {
             l.data[out][i] = TensorPayload.readValue(l, a, i) * scalar;
+            unchecked {
+                i++;
+            }
         }
 
         emit TensorComputed(a, bytes32(0), out, "scale");
@@ -122,8 +128,9 @@ contract TensorMathFacet {
         require(mb.owner == msg.sender, "not owner B");
         require(l.exists[a], "missing A");
         require(l.exists[b], "missing B");
+        uint256 size = ma.size;
         require(ma.rank == 1 && mb.rank == 1, "not 1D");
-        require(ma.size == mb.size, "length mismatch");
+        require(size == mb.size, "length mismatch");
 
         uint64 nonce = ++l.nonces[msg.sender][seed];
         out = SeedUtils.tensorId(msg.sender, seed, nonce);
@@ -146,8 +153,11 @@ contract TensorMathFacet {
         l.owned[msg.sender].push(out);
 
         int256 acc;
-        for (uint256 i = 0; i < ma.size; i++) {
+        for (uint256 i; i < size; ) {
             acc += TensorPayload.readValue(l, a, i) * TensorPayload.readValue(l, b, i);
+            unchecked {
+                i++;
+            }
         }
 
         l.data[out][0] = acc;
