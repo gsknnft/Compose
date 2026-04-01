@@ -4,7 +4,7 @@
   "description": "CLI to scaffold Compose facet-based diamond projects",
   "main": "index.js",
   "bin": {
-    "compose": "./index.js"
+    "compose": "bin/compose.js"
   },
   "type": "commonjs",
   "scripts": {
@@ -68,7 +68,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Perfect-Abstractions/Compose.git"
+    "url": "git+https://github.com/Perfect-Abstractions/Compose.git"
   },
   "homepage": "https://compose.diamonds",
   "bugs": {
