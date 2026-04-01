@@ -53,6 +53,19 @@ function validateEntries(packages) {
     if (typeof p.needsFoundry !== 'boolean') {
       throw new Error(`needsFoundry must be boolean for id "${p.id}"`);
     }
+    if ('releaseNotesPaths' in p) {
+      if (!Array.isArray(p.releaseNotesPaths) || p.releaseNotesPaths.length === 0) {
+        throw new Error(`releaseNotesPaths must be a non-empty string array for id "${p.id}"`);
+      }
+      for (const rp of p.releaseNotesPaths) {
+        if (typeof rp !== 'string' || !rp.trim()) {
+          throw new Error(`releaseNotesPaths entries must be non-empty strings for id "${p.id}"`);
+        }
+      }
+    }
+    if ('releaseNotesMode' in p && p.releaseNotesMode !== 'pr' && p.releaseNotesMode !== 'commits') {
+      throw new Error(`releaseNotesMode must be "pr" or "commits" for id "${p.id}"`);
+    }
     if (ids.has(p.id)) {
       throw new Error(`Duplicate id: ${p.id}`);
     }
@@ -82,14 +95,19 @@ function main() {
     console.log(`${p.id}: package.json=${localVer} npm=${npmVer || '<not published>'}`);
 
     if (needsPublish) {
-      include.push({
+      const entry = {
         id: p.id,
         workspace: p.workspace,
         versionFile: p.versionFile,
         tagPrefix: p.tagPrefix,
         needsFoundry: p.needsFoundry,
         check: p.check,
-      });
+      };
+      if (p.releaseNotesPaths) {
+        entry.releaseNotesPaths = p.releaseNotesPaths;
+      }
+      entry.releaseNotesMode = p.releaseNotesMode === 'commits' ? 'commits' : 'pr';
+      include.push(entry);
     }
   }
 
