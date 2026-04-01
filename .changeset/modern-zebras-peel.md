@@ -1,5 +1,5 @@
 ---
-"@fake-scope/fake-pkg": patch
+"@perfect-abstractions/compose-cli": patch
 ---
 
 fix: compiler versions & imports
