@@ -43,7 +43,7 @@ compose init
 ### Foundry
 
 ```bash
-forge install Perfect-Abstractions/Compose@tag=compose@0.0.2
+forge install Perfect-Abstractions/Compose@tag=compose@0.0.3
 ```
 
 Create a `remappings.txt` file in the root of your project with the following content:
