@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.5
+
+### Patch Changes
+
+- 404aafc: fix deployment setup on hardhat
+
 ## 0.0.4
 
 ### Patch Changes
