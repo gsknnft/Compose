@@ -125,7 +125,7 @@
   margin: 0 auto 1.75rem;
   font-size: clamp(0.95rem, 2vw, 1.0625rem);
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.88);
+  color: rgba(255, 255, 255);
   max-width: 32rem;
 }
 

@@ -4,11 +4,18 @@ If you discover a security vulnerability, report it PRIVATELY with the maintaine
 
 ## Supported Versions
 
-Compose is currently under active development.</br>We actively support these versions:
+Compose is currently under active development. It is **NOT production ready.** and we may still make breaking changes to any part of the codebase.
+
+</br>**We actively support these versions:**
 
 | Version | Supported          |
 | ------- | ------------------ |
 | latest (main)   | :white_check_mark: |
+
+for both packages:
+
+- [`@perfect-abstractions/compose`](https://www.npmjs.com/package/@perfect-abstractions/compose)
+- [`@perfect-abstractions/compose-cli`](https://www.npmjs.com/package/@perfect-abstractions/compose-cli)
 
 ## Reporting a Vulnerability
 

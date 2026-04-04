@@ -67,10 +67,12 @@ export default function NavbarContent() {
           {!mobileSidebar.disabled && <NavbarMobileSidebarToggle />}
           <NavbarLogo />
           {/* Status Badge */}
+          <a href="https://github.com/Perfect-Abstractions/Compose?tab=security-ov-file">
           <div className={styles.statusBadge}>
             <span className={styles.badgeDot}></span>
-            <span className={styles.badgeText}>Early Stage</span>
+            <span className={styles.badgeText}>Early Stage Development</span>
           </div>
+          </a>
           <NavbarItems items={leftItems} />
         </>
       }

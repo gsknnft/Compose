@@ -19,7 +19,7 @@ export default function CtaSection() {
               Ready to build with Compose?
             </Heading>
             <p className={styles.ctaDescription}>
-              Start building your next smart contract system.
+              Install Compose and put together a diamond-based system you can grow one facet at a time.
             </p>
             <div className={styles.ctaActions}>
               <Link to="/docs" className={clsx(styles.ctaButton, styles.ctaPrimaryLight)}>
