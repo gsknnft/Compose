@@ -1,0 +1,71 @@
+.aside {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+/* Right column with no TOC above: avoid double separator at rail top */
+.asideSoloInRail {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+[data-theme='dark'] .aside {
+  border-top-color: var(--ifm-color-emphasis-300);
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.625rem;
+  margin-top: 1rem;
+}
+
+.editWrap :global(a) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ifm-color-emphasis-700);
+  text-decoration: none;
+}
+
+.editWrap :global(a:hover) {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+[data-theme='dark'] .editWrap :global(a) {
+  color: var(--ifm-color-emphasis-600);
+}
+
+.reportLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ifm-color-emphasis-700);
+  text-decoration: none;
+}
+
+.reportLink:hover {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+[data-theme='dark'] .reportLink {
+  color: var(--ifm-color-emphasis-600);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .editWrap :global(a),
+  .reportLink {
+    transition:
+      color 160ms cubic-bezier(0.23, 1, 0.32, 1),
+      opacity 160ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+}

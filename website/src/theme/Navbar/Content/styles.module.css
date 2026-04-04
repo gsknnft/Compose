@@ -2,6 +2,18 @@
  * Styles for custom navbar content components
  */
 
+.earlyStageLink {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.earlyStageLink:hover {
+  text-decoration: none;
+}
+
 /* Status Badge */
 .statusBadge {
   display: inline-flex;
@@ -66,9 +78,50 @@
   transform: rotate(180deg);
 }
 
-/* Hide status badge until 1094px */
+/* Compact label for narrow viewports (desktop badge hidden) */
+.mobileEarlyStageBadge {
+  display: none;
+  align-items: center;
+  margin-left: 0.35rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  background: linear-gradient(
+    135deg,
+    rgba(234, 179, 8, 0.12) 0%,
+    rgba(202, 138, 4, 0.06) 100%
+  );
+  border: 1px solid rgba(234, 179, 8, 0.25);
+  color: #a16207;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-theme='dark'] .mobileEarlyStageBadge {
+  background: linear-gradient(
+    135deg,
+    rgba(253, 224, 71, 0.14) 0%,
+    rgba(250, 204, 21, 0.07) 100%
+  );
+  border-color: rgba(253, 224, 71, 0.28);
+  color: #fde047;
+}
+
+.earlyStageLink:hover .mobileEarlyStageBadge {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(234, 179, 8, 0.18);
+}
+
+/* Desktop: full badge; mobile/tablet: compact only */
 @media (max-width: 1093px) {
   .statusBadge {
     display: none !important;
+  }
+
+  .mobileEarlyStageBadge {
+    display: inline-flex;
   }
 }

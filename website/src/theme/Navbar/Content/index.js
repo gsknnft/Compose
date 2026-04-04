@@ -18,6 +18,9 @@ import NavbarSearch from '@theme/Navbar/Search';
 import NavbarGradient from '@site/src/components/navigation/NavbarGradient';
 import styles from './styles.module.css';
 
+const SECURITY_OVERVIEW_HREF =
+  'https://github.com/Perfect-Abstractions/Compose?tab=security-ov-file';
+
 function useNavbarItems() {
   return useThemeConfig().navbar.items;
 }
@@ -66,11 +69,16 @@ export default function NavbarContent() {
         <>
           {!mobileSidebar.disabled && <NavbarMobileSidebarToggle />}
           <NavbarLogo />
-          {/* Status Badge */}
-          <div className={styles.statusBadge}>
-            <span className={styles.badgeDot}></span>
-            <span className={styles.badgeText}>Early Stage</span>
-          </div>
+          <a
+            href={SECURITY_OVERVIEW_HREF}
+            className={styles.earlyStageLink}
+            rel="noopener noreferrer">
+            <span className={styles.statusBadge}>
+              <span className={styles.badgeDot} />
+              <span className={styles.badgeText}>Early Stage Development</span>
+            </span>
+            <span className={styles.mobileEarlyStageBadge}>Early Stage</span>
+          </a>
           <NavbarItems items={leftItems} />
         </>
       }

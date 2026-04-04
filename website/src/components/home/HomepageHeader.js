@@ -15,11 +15,6 @@ export default function HomepageHeader() {
 
   const badgeAndTitle = (
     <>
-      <div className={styles.badgeWrapper}>
-        <span className={styles.badge}>
-          <Icon name="warning" size={20} /> Not Production Ready
-        </span>
-      </div>
       <Heading as="h1" className={styles.heroTitle}>
         Build the future of<br />
         <span className={styles.heroTitleGradient}>Smart Contracts</span>
@@ -37,24 +32,25 @@ export default function HomepageHeader() {
       <div className={styles.heroCta}>
         <Link className={clsx(styles.ctaButton, styles.ctaPrimary)} to="/docs">
           <span>Get Started</span>
-          <Icon name="arrow-right" size={20} />
+          <svg
+            className={styles.ctaButtonIcon}
+            width={20}
+            height={20}
+            viewBox="0 0 20 20"
+            aria-hidden="true"
+            focusable="false">
+            <path
+              d="M7.5 5L12.5 10L7.5 15"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </Link>
         <Link className={clsx(styles.ctaButton, styles.ctaSecondary)} to="/docs/foundations">
           <span>Learn Core Concepts</span>
-        </Link>
-      </div>
-      <div className={styles.heroLinks}>
-        <a href="https://github.com/Perfect-Abstractions/Compose" target="_blank" rel="noopener noreferrer" className={styles.heroLink}>
-          <Icon name="github" size={20} />
-          <span>GitHub</span>
-        </a>
-        <a href="https://discord.gg/DCBD2UKbxc" target="_blank" rel="noopener noreferrer" className={styles.heroLink}>
-          <Icon name="discord" size={20} />
-          <span>Join Discord</span>
-        </a>
-        <Link to="/docs/contribution/how-to-contribute" className={styles.heroLink}>
-          <Icon name="users" size={20} />
-          <span>Contribute</span>
         </Link>
       </div>
     </>

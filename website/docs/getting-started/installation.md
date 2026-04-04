@@ -17,7 +17,7 @@ Compose is published as two npm packages:
 
 ## Prerequisites
 
-- **Node.js >= 20**: required for the CLI and for npm-based Hardhat workflows
+- **[Node.js](https://nodejs.org/) >= 20**: required for the CLI and for npm-based Hardhat workflows
 - **[Foundry](https://book.getfoundry.sh/getting-started/installation) (Optional)**: required if you use a Foundry scaffold or integrate Solidity with Forge
 - **Git**: used by Foundry dependency installs inside generated projects
 
@@ -38,7 +38,7 @@ npm install -g @perfect-abstractions/compose-cli
 compose init
 ```
 
-## Add Compose to an existing project (Manual Installation)
+## Add Compose to an existing project
 
 ### Foundry
 
@@ -64,13 +64,12 @@ npm install @perfect-abstractions/compose
 import {DiamondMod} from "@perfect-abstractions/compose/diamond/DiamondMod.sol";
 ```
 
-<!-- ## What's Next?
+## What's Next?
 
 Now that you have Compose installed, let's understand the core concepts:
 
-- **[Core Concepts](/)** - Learn about facets, libraries, and shared storage
-- **[Quick Start Guide](/docs/getting-started/quick-start)** - Jump right in with a working example
-- **[Your First Diamond](/docs/getting-started/your-first-diamond)** - Build a simple diamond with Compose facets -->
+- **[Core Concepts](/docs/foundations)** - Learn about facets, libraries, and shared storage
+- **[Explore Available Contracts](https://github.com/Perfect-Abstractions/Compose/tree/main/src)** - See what else you can add
 
 ## Getting Help
 

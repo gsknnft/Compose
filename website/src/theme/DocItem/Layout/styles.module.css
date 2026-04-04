@@ -1,0 +1,61 @@
+/**
+ * DocItem Layout (swizzled from theme-classic)
+ */
+.docItemContainer header + *,
+.docItemContainer article > *:first-child {
+  margin-top: 0;
+}
+
+@media (min-width: 997px) {
+  .docItemCol {
+    max-width: 75% !important;
+  }
+
+  /**
+   * Sticky column: TOC scrolls in a capped region; feedback sits below (no overlap).
+   * Do not use flex: 1 on the scroll wrapper when the rail only has max-height — with
+   * height:auto the flex item collapses to 0 and the TOC vanishes.
+   */
+  .docTocRail {
+    --doc-toc-footer-slot: 13.5rem;
+    position: sticky;
+    top: calc(var(--ifm-navbar-height) + 1rem);
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-height: calc(100vh - var(--ifm-navbar-height) - 2rem);
+    width: 100%;
+  }
+
+  .docTocRailScroll {
+    flex: 0 1 auto;
+    max-height: calc(
+      100vh - var(--ifm-navbar-height) - 2rem - var(--doc-toc-footer-slot)
+    );
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  /* Rail owns stickiness + outer scroll; reset theme TOC sticky/max-height */
+  .docTocRailScroll :global(.theme-doc-toc-desktop) {
+    position: static !important;
+    max-height: none !important;
+    top: auto !important;
+    overflow: visible !important;
+  }
+
+  .docTocRailFooter {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  /* Feedback + links when there is no TOC (still use right column) */
+  .docAsideOnly {
+    position: sticky;
+    top: calc(var(--ifm-navbar-height) + 1rem);
+    align-self: flex-start;
+    width: 100%;
+  }
+}

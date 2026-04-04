@@ -11,6 +11,7 @@ export { default as RelatedDocs } from './docs/RelatedDocs';
 export { default as LastUpdated } from './docs/LastUpdated';
 export { default as ReadingTime } from './docs/ReadingTime';
 export { default as WasThisHelpful } from './docs/WasThisHelpful';
+export { default as DocPageAside } from './docs/DocPageAside';
 export { default as StepIndicator } from './docs/StepIndicator';
 
 // UI Components
