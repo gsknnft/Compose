@@ -149,6 +149,17 @@
   box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.07);
 }
 
+/* Homepage code column only (not narrow slide-over panel): edge definition on large viewports */
+@media screen and (min-width: 1101px) {
+  [data-theme='light'] .showcaseCode .codeWindow {
+    border: 1px solid rgba(15, 23, 42, 0.12);
+  }
+
+  [data-theme='dark'] .showcaseCode .codeWindow {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
 [data-theme='light'] .codeWindowHeader {
   background: #f8fafc;
   border-bottom: none;
@@ -218,6 +229,48 @@
 .codeShowcaseBlockRoot :global(.theme-code-block) {
   margin-bottom: 0 !important;
   box-shadow: none !important;
+}
+
+/* Toolbar (copy / wrap): hide the whole Docusaurus button row until the faux window is hovered.
+   Opacity-only on <button> can still leave visible borders/backgrounds in some cases; collapsing
+   the wrapper avoids that. Keyboard: :focus-within keeps the row available while tabbing. */
+.codeWindow:has(.codeShowcaseBlockRoot):not(:hover)
+  .codeShowcaseBlockRoot
+  :global(div[class*='buttonGroup']):not(:focus-within) {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.codeWindow:has(.codeShowcaseBlockRoot):hover
+  .codeShowcaseBlockRoot
+  :global(div[class*='buttonGroup']),
+.codeWindow:has(.codeShowcaseBlockRoot)
+  .codeShowcaseBlockRoot
+  :global(div[class*='buttonGroup']):focus-within {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.codeWindow:has(.codeShowcaseBlockRoot):hover
+  .codeShowcaseBlockRoot
+  :global(div[class*='buttonGroup'])
+  button {
+  opacity: 0.4 !important;
+  pointer-events: auto;
+}
+
+.codeWindow:has(.codeShowcaseBlockRoot)
+  .codeShowcaseBlockRoot
+  :global(div[class*='buttonGroup'])
+  button:hover,
+.codeWindow:has(.codeShowcaseBlockRoot)
+  .codeShowcaseBlockRoot
+  :global(div[class*='buttonGroup'])
+  button:focus-visible {
+  opacity: 1 !important;
+  pointer-events: auto;
 }
 
 .showcaseCode .codeWindow .codeShowcaseBlockRoot :global(.theme-code-block) {

@@ -215,18 +215,34 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Getting Started',
-                to: '/docs',
+                label: 'Introduction',
+                to: '/docs/',
               },
               {
                 label: 'Installation',
                 to: '/docs/getting-started/installation',
+              },
+              {
+                label: 'Foundations',
+                to: '/docs/foundations/',
+              },
+              {
+                label: "Design Principles",
+                to: '/docs/design/',
+              },
+              {
+                label: 'How to Contribute',
+                to: '/docs/contribution/how-to-contribute',
               },
             ],
           },
           {
             title: 'Community',
             items: [
+              {
+                label: 'Blog',
+                to: '/blog',
+              },
               {
                 label: 'Discord',
                 href: 'https://discord.gg/DCBD2UKbxc',
@@ -238,15 +254,15 @@ const config = {
             ],
           },
           {
-            title: 'More',
+            title: 'Project',
             items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
               {
                 label: 'GitHub',
                 href: 'https://github.com/Perfect-Abstractions/Compose',
+              },
+              {
+                label: 'Security',
+                href: 'https://github.com/Perfect-Abstractions/Compose?tab=security-ov-file',
               },
               {
                 label: 'MIT License',

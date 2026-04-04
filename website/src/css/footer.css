@@ -3,56 +3,254 @@
  * Footer styling for light and dark modes
  */
 
-/* CSS Variables for Netlify Badge */
 :root {
-  --netlify-badge-color: #8EFBF7;
+  --netlify-badge-color: #8efbf7;
   --netlify-badge-bg-light: rgba(255, 255, 255, 0.1);
   --netlify-badge-bg-light-hover: rgba(255, 255, 255, 0.15);
   --netlify-badge-bg-dark: rgba(255, 255, 255, 0.08);
   --netlify-badge-bg-dark-hover: rgba(255, 255, 255, 0.12);
-  --netlify-badge-spacing: 0.75rem;
-  --netlify-badge-gap-reduction: -0.5rem;
+  --footer-meta-border: rgba(255, 255, 255, 0.12);
+  --ease-footer: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* Light mode footer */
+/* Solid “dock” footer (avoids competing with page hero gradients) */
 .footer {
-  background: linear-gradient(135deg, #1e3a8a 0%, #1e293b 100%);
-  color: #ffffff;
+  background: #0f172a;
+  color: #f8fafc;
   position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* Section labels: quieter than link text */
 .footer__title {
-  color: var(--ifm-color-primary-lighter);
+  font-size: 0.75rem;
   font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin-bottom: 1rem;
 }
 
-/* Dark mode footer */
+.footer__link-item {
+  color: #e2e8f0;
+  transition: color 160ms var(--ease-footer);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer__link-item:hover {
+    color: #93c5fd;
+  }
+}
+
+.footer__item {
+  color: #cbd5e1;
+}
+
+/* Space between link grid and meta row */
+.footer__links {
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Mobile: collapsible footer columns (native <details>) */
+.footer__links--accordion .footer__accordionSection {
+  width: 100%;
+  max-width: 100%;
+  flex: 0 0 100%;
+  margin-bottom: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer__links--accordion .footer__accordionSection:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.footer__accordionSummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 2.75rem;
+  padding-block: 0.35rem;
+  cursor: pointer;
+  list-style: none;
+  transition: transform 160ms var(--ease-footer);
+  margin-bottom: 1rem;
+}
+
+.footer__accordionSummary::-webkit-details-marker {
+  display: none;
+}
+
+.footer__accordionSummary:active {
+  transform: scale(0.99);
+}
+
+.footer__accordionSummary:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Title shares a row with the chevron — no bottom margin (spacing lives on .footer__accordionSection) */
+.footer__links--accordion .footer__accordionSummary .footer__title {
+  margin-bottom: 0;
+}
+
+.footer__accordionTitle {
+  text-align: start;
+}
+
+.footer__accordionChevron {
+  display: block;
+  width: 0.45rem;
+  height: 0.45rem;
+  flex-shrink: 0;
+  border-right: 2px solid #94a3b8;
+  border-bottom: 2px solid #94a3b8;
+  transform: rotate(-45deg);
+  transition: transform 180ms var(--ease-footer);
+}
+
+.footer__links--accordion .footer__accordionSection[open] .footer__accordionChevron {
+  transform: rotate(45deg);
+}
+
+.footer__accordionList {
+  margin: 0 0 0.75rem;
+  padding: 0.15rem 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer__accordionChevron {
+    transition: none;
+  }
+
+  .footer__accordionSummary {
+    transition: none;
+  }
+
+  .footer__accordionSummary:active {
+    transform: none;
+  }
+}
+
+[data-theme='dark'] .footer__links--accordion .footer__accordionSection {
+  border-bottom-color: rgba(148, 163, 184, 0.2);
+}
+
+[data-theme='dark'] .footer__accordionChevron {
+  border-right-color: #64748b;
+  border-bottom-color: #64748b;
+}
+
+.footer__bottom {
+  margin-top: 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--footer-meta-border);
+}
+
+.footer__metaRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+@media (min-width: 997px) {
+  .footer__metaRow {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+}
+
+/* Wraps <FooterCopyright />; inner .footer__copyright comes from the theme component */
+.footer__copyrightCol {
+  min-width: 0;
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 997px) {
+  .footer__copyrightCol {
+    width: auto;
+    max-width: min(100%, 42rem);
+    text-align: left;
+  }
+}
+
+.footer__copyrightCol .footer__copyright,
+.footer__copyright {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #94a3b8;
+}
+
+.footer__copyrightCol .footer__copyright a,
+.footer__copyright a {
+  color: #93c5fd;
+  transition: color 160ms var(--ease-footer);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer__copyrightCol .footer__copyright a:hover,
+  .footer__copyright a:hover {
+    color: #bfdbfe;
+  }
+}
+
 [data-theme='dark'] .footer {
   background: #0a0e1a;
-  border-top: 1px solid #1e293b;
+  border-top-color: #1e293b;
 }
 
 [data-theme='dark'] .footer__title {
-  color: #ffffff;
+  color: #64748b;
 }
 
 [data-theme='dark'] .footer__item {
-  color: #909090;
+  color: #94a3b8;
 }
 
-[data-theme='dark'] .footer__link-item:hover {
+[data-theme='dark'] .footer__link-item {
+  color: #cbd5e1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-theme='dark'] .footer__link-item:hover {
+    color: #60a5fa;
+  }
+}
+
+[data-theme='dark'] .footer__copyrightCol .footer__copyright,
+[data-theme='dark'] .footer__copyright {
+  color: #64748b;
+}
+
+[data-theme='dark'] .footer__copyrightCol .footer__copyright a,
+[data-theme='dark'] .footer__copyright a {
   color: #60a5fa;
 }
 
-/* ============================================
-   NETLIFY BADGE STYLES
-   ============================================ */
+@media (hover: hover) and (pointer: fine) {
+  [data-theme='dark'] .footer__copyrightCol .footer__copyright a:hover,
+  [data-theme='dark'] .footer__copyright a:hover {
+    color: #93c5fd;
+  }
+}
 
+[data-theme='dark'] .footer__bottom {
+  border-top-color: rgba(148, 163, 184, 0.2);
+}
+
+/* Netlify badge — in document flow with copyright */
 .netlifyBadge {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  z-index: 10;
+  position: static;
+  flex-shrink: 0;
 }
 
 .netlifyBadge a {
@@ -67,19 +265,29 @@
   text-decoration: none;
   font-size: 0.875rem;
   font-weight: 500;
-  transition: all 0.2s ease;
+  transition:
+    background-color 160ms var(--ease-footer),
+    box-shadow 160ms var(--ease-footer),
+    transform 160ms var(--ease-footer),
+    border-color 160ms var(--ease-footer);
   box-shadow: 0 4px 12px rgba(142, 251, 247, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(12px) saturate(180%);
   -webkit-backdrop-filter: blur(12px) saturate(180%);
 }
 
-.netlifyBadge a:hover {
-  background: var(--netlify-badge-bg-light-hover);
-  border-color: var(--netlify-badge-color);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(142, 251, 247, 0.3), 0 2px 6px rgba(0, 0, 0, 0.15);
-  text-decoration: none;
-  color: #ffffff;
+@media (hover: hover) and (pointer: fine) {
+  .netlifyBadge a:hover {
+    background: var(--netlify-badge-bg-light-hover);
+    border-color: var(--netlify-badge-color);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(142, 251, 247, 0.3), 0 2px 6px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+    color: #ffffff;
+  }
+}
+
+.netlifyBadge a:active {
+  transform: scale(0.98);
 }
 
 .netlifyBadge .badgeDot {
@@ -100,91 +308,39 @@
   color: var(--netlify-badge-color);
 }
 
-/* Dark mode badge adjustments - keep glassmorphism */
 [data-theme='dark'] .netlifyBadge a {
   background: var(--netlify-badge-bg-dark);
   border: 1px solid var(--netlify-badge-color);
 }
 
-[data-theme='dark'] .netlifyBadge a:hover {
-  background: var(--netlify-badge-bg-dark-hover);
-  border-color: var(--netlify-badge-color);
+@media (hover: hover) and (pointer: fine) {
+  [data-theme='dark'] .netlifyBadge a:hover {
+    background: var(--netlify-badge-bg-dark-hover);
+    border-color: var(--netlify-badge-color);
+  }
 }
 
-/* ============================================
-   RESPONSIVE STYLES
-   ============================================ */
-
-/* Mobile: Badge appears below copyright inside footer */
 @media (max-width: 996px) {
-  /* Footer spacing reset */
+  .footer__links {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
   .footer__bottom {
-    margin-bottom: 0;
-    padding-bottom: 0;
+    padding-top: 1.75rem;
   }
-  
-  .footer {
-    padding-bottom: 0;
-    margin-bottom: 0;
-  }
-  
-  /* Badge positioning for mobile */
-  .footer ~ .netlifyBadge,
-  .netlifyBadge {
-    position: static;
-    bottom: auto;
-    right: auto;
-    margin-top: var(--netlify-badge-gap-reduction);
-    margin-bottom: 0;
-    text-align: center;
-    padding-top: 0;
-    padding-bottom: var(--netlify-badge-spacing);
-    padding-left: 1rem;
-    padding-right: 1rem;
-    border-top: none;
-    width: 100%;
-    background: linear-gradient(135deg, #1e3a8a 0%, #1e293b 100%);
-  }
-  
-  .footer ~ .netlifyBadge {
-    margin-bottom: 0;
-  }
-  
-  [data-theme='dark'] .footer ~ .netlifyBadge,
-  [data-theme='dark'] .netlifyBadge {
-    background: #0a0e1a;
-  }
-  
-  .netlifyBadge a {
-    padding: 8px 16px;
-    font-size: 0.875rem;
-    display: inline-flex;
-  }
-  
-  .netlifyBadge .badgeDot {
-    width: 8px;
-    height: 8px;
+
+  .footer__metaRow {
+    gap: 1rem;
   }
 }
 
 @media (max-width: 768px) {
-  .footer {
-    padding-bottom: 0;
-    margin-bottom: 0;
-  }
-  
-  .netlifyBadge {
-    margin-top: var(--netlify-badge-gap-reduction);
-    margin-bottom: 0;
-    padding-top: 0;
-    padding-bottom: var(--netlify-badge-spacing);
-  }
-  
   .netlifyBadge a {
     padding: 6px 12px;
     font-size: 0.75rem;
   }
-  
+
   .netlifyBadge .badgeDot {
     width: 6px;
     height: 6px;
@@ -192,27 +348,15 @@
 }
 
 @media (max-width: 480px) {
-  .footer {
-    padding-bottom: 0;
-    margin-bottom: 0;
-  }
-  
-  .netlifyBadge {
-    margin-top: var(--netlify-badge-gap-reduction);
-    margin-bottom: 0;
-    padding-top: 0;
-    padding-bottom: var(--netlify-badge-spacing);
-  }
-  
   .netlifyBadge .badgeText {
     display: inline;
   }
-  
+
   .netlifyBadge a {
     padding: 6px 12px;
     font-size: 0.75rem;
   }
-  
+
   .netlifyBadge .badgeDot {
     width: 6px;
     height: 6px;

@@ -20,18 +20,6 @@ export default function FooterWrapper(props) {
       <div ref={newsletterRef} className={styles.footerNewsletterSection}>
         <FooterNewsletterSignup />
       </div>
-      <div className="netlifyBadge">
-        <a 
-          href="https://www.netlify.com" 
-          target="_blank" 
-          rel="noopener noreferrer"
-        >
-          <span className="badgeDot"></span>
-          <span className="badgeText">
-            This site is powered by <span className="badgeTextNetlify">Netlify</span>
-          </span>
-        </a>
-      </div>
     </div>
   );
 }
