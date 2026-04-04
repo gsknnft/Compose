@@ -1766,13 +1766,14 @@ Smooth counting animation for numbers.
 
 ### WasThisHelpful
 
-Feedback widget for collecting user feedback on documentation pages.
+Feedback widget for documentation pages. The **`aside`** variant is injected automatically at the bottom of the doc TOC column on desktop (and inline above the page pager on mobile) via the swizzled doc layout. Use the **`card`** variant when you want an embedded demo in MDX.
 
 <Badge variant="success">Feedback</Badge>
 
 #### Live Example
 
 <WasThisHelpful
+  variant="card"
   pageId="all-components-demo"
   onSubmit={(feedback) => console.log(feedback)}
 />
@@ -1782,8 +1783,11 @@ Feedback widget for collecting user feedback on documentation pages.
 <PropertyTable 
   showRequired={false}
   properties={[
-    { name: 'pageId', type: 'string', description: 'Unique page identifier' },
-    { name: 'onSubmit', type: 'Function', description: 'Callback when feedback submitted' }
+    { name: 'variant', type: "'card' | 'aside'", description: 'Layout: card (MDX demos) or aside (global doc rail; used by DocPageAside)' },
+    { name: 'pageId', type: 'string', description: 'Optional stable id for analytics' },
+    { name: 'permalink', type: 'string', description: 'Doc path (set automatically in global aside)' },
+    { name: 'title', type: 'string', description: 'Doc title for PostHog breakdowns' },
+    { name: 'onSubmit', type: 'Function', description: 'Optional callback when feedback is submitted (PostHog still captures)' }
   ]}
 />
 
@@ -1791,9 +1795,10 @@ Feedback widget for collecting user feedback on documentation pages.
 
 ```jsx
 <WasThisHelpful
+  variant="card"
   pageId="unique-page-id"
   onSubmit={(feedback) => {
-    // Handle feedback
+    // Optional: PostHog events docs_helpful_vote / docs_helpful_submit still fire
     console.log(feedback);
   }}
 />
@@ -1801,17 +1806,14 @@ Feedback widget for collecting user feedback on documentation pages.
 
 #### Best Practices
 
-- Place at bottom of pages
-- Use unique pageId per page
-- Integrate with analytics
-- Respond to feedback
+- Prefer the built-in global aside on real docs; use `variant="card"` only for examples
+- Optional `pageId` helps PostHog filters; global aside uses permalink and title from the doc
+- Events: `docs_helpful_vote`, `docs_helpful_submit` (when PostHog is enabled)
 
 #### When to Use
 
-- End of documentation pages
-- After tutorials
-- Product documentation
-- Help articles
+- `variant="card"` in MDX examples or special pages without the global doc layout
+- Most real docs rely on the built-in aside (no manual component needed)
 
 ---
 
@@ -2208,7 +2210,5 @@ import Icon from '@site/src/components/ui/Icon';
 </div>
 
 ---
-
-<WasThisHelpful pageId="all-components-reference" />
 
 <LastUpdated date={new Date().toISOString()} />

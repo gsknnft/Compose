@@ -35,6 +35,11 @@ const config = {
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
+  customFields: {
+    reportIssueUrl:
+      process.env.DOC_REPORT_ISSUE_URL ||
+      'https://github.com/Perfect-Abstractions/Compose/issues/new/choose',
+  },
 
   // Broken link handling
   onBrokenLinks: 'throw',
@@ -193,13 +198,12 @@ const config = {
           //   ],
           // },
           {
-            href: 'https://discord.gg/DCBD2UKbxc',
-            label: 'Discord',
+            type: 'custom-githubStars',
             position: 'right',
           },
           {
-            href: 'https://github.com/Perfect-Abstractions/Compose',
-            label: 'GitHub',
+            href: 'https://discord.gg/DCBD2UKbxc',
+            label: 'Discord',
             position: 'right',
           },
         ],
